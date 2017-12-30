@@ -9,10 +9,19 @@ app.jinja_env.undefined = StrictUndefined
 
 
 @app.route('/')
-def login():
-    """ My login page."""
+def register():
+    """My login page."""
 
     return render_template('login.html')
+
+
+@app.route('/register_confirm', methods=["POST"])
+def register_confirm():
+    """Registration confirmation page."""
+
+    email = request.form.get("email")
+
+    return render_template('register_confirm.html', email=email)
 
 
 #------------------------------------------
