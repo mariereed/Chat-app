@@ -9,9 +9,9 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(50), nullable=True)
     email = db.Column(db.String(40), nullable=False)
-    password = db.Column(db.String(200), nullable=False)
+    password = db.Column(db.String(200), nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -27,7 +27,7 @@ class Message(db.Model):
     message_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     conversation_id = db.Column(db.Integer, db.ForeignKey('conversations.conversation_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    publish_date = db.Column(db.DateTime, nullable=False)
+    publish_date = db.Column(db.DateTime, nullable=True)
     content = db.Column(db.String(10000), nullable=True)
 
     def __repr__(self):

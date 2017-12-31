@@ -1,5 +1,6 @@
 from jinja2 import StrictUndefined
 from flask import Flask, render_template, redirect, request, flash, session, jsonify
+from model import User, Message, Conversation, User_conv
 
 app = Flask(__name__)
 # Required to use Flask sessions and the debug toolbar
@@ -21,8 +22,29 @@ def register_confirm():
 
     email = request.form.get("email")
 
+    #add the user to the session
+    session['user_email'] = email
+
+    #add the user to the db
+    email = User(email=email)
+
+    db.session.add(email)
+    db.session.commit()
+
     return render_template('register_confirm.html', email=email)
 
+
+@app.route('/add_message', methods=["POST"])
+def add_message():
+    """Add messages to message log"""
+
+    message = request.form.get("message")
+
+    #add the message too the db
+
+    #collect all messages from the db
+
+    return render_template('login.html')
 
 #------------------------------------------
 

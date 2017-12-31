@@ -4,10 +4,11 @@
     <title>Registration Confirmation</title>
   </head>
   <body>
-    Hello {{ email }}, you are registered!
+    Hello {{ email }}!
     <br>
-
-    But not really, I haven't added you to the DB...
-
+    <form action="/add_message" method="POST">
+      <input type="text" name="message">
+      <input type="submit">
+    </form>
   </body>
 </html>
