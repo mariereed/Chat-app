@@ -1,6 +1,6 @@
 from jinja2 import StrictUndefined
 from flask import Flask, render_template, redirect, request, flash, session, jsonify
-from model import User, Message, Conversation, User_conv
+from model import User, Message, Conversation, User_conv, db, connect_to_db
 
 app = Flask(__name__)
 # Required to use Flask sessions and the debug toolbar
@@ -61,6 +61,6 @@ if __name__ == "__main__":
     app.debug = True
     app.jinja_env.auto_reload = app.debug  # make sure templates, etc. are not cached in debug mode
 
-    #connect_to_db(app, 'postgresql:///projectdb')
+    connect_to_db(app, 'postgresql:///chatappdb')
 
     app.run(port=5000, host='0.0.0.0')
