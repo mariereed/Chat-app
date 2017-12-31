@@ -25,10 +25,12 @@ class Message(db.Model):
     __tablename__ = "messages"
 
     message_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    conversation_id = db.Column(db.Integer, db.ForeignKey('conversations.conversation_id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    conversation_id = db.Column(db.Integer, db.ForeignKey('conversations.conversation_id'), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     publish_date = db.Column(db.DateTime, nullable=True)
-    content = db.Column(db.String(10000), nullable=True)
+    content = db.Column(db.String(10000), nullable=False)
+
+    user = db.relationship("User", backref='messages')
 
     def __repr__(self):
         """Provide helpful representation when printed."""

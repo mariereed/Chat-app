@@ -40,11 +40,20 @@ def add_message():
 
     message = request.form.get("message")
 
-    #add the message too the db
+    #get the user's id
+    user_id = User.query.filter(User.email == session["email"]).first()
+
+    #add the message to the db
+    message = Message(content=message, user_id=user_id)
+
+    db.session.add(message)
+    db.session.commit()
 
     #collect all messages from the db
+    messages = Message.query.all()
 
-    return render_template('login.html')
+    return render_template('register_confirm.html', messages=messages, email=session["email"])
+
 
 #------------------------------------------
 
