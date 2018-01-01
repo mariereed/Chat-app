@@ -7,7 +7,12 @@
 
     Hello {{ user_email }}!
     <br>
-    
+    {% if messages %}
+      {% for message in messages %}
+        {{ message.content }}
+        <br>
+      {% endfor %}
+    {% endif %}
     <form action="/add_message" method="POST">
       <input type="text" name="message">
       <input type="submit">

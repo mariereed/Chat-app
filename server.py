@@ -52,7 +52,7 @@ def add_message():
     #collect all messages from the db
     messages = Message.query.all()
 
-    return render_template('register_confirm.html', user_email=session['email'])
+    return render_template('register_confirm.html', messages=messages, user_email=session['email'])
 
 
 #------------------------------------------
