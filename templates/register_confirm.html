@@ -9,8 +9,7 @@
     <br>
     {% if messages %}
       {% for message in messages %}
-        {{ message.content }}
-        <br>
+        <p>{{ message.content }} -- {{message.user.email}}</p>
       {% endfor %}
     {% endif %}
     <form action="/add_message" method="POST">
