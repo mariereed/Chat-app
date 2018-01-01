@@ -23,15 +23,15 @@ def register_confirm():
     email = request.form.get("email")
 
     #add the user to the session
-    session['user_email'] = email
+    session['email'] = email
 
     #add the user to the db
-    email = User(email=email)
+    new_user = User(email=email)
 
-    db.session.add(email)
+    db.session.add(new_user)
     db.session.commit()
 
-    return render_template('register_confirm.html', email=email)
+    return render_template('register_confirm.html', user_email=session['email'])
 
 
 @app.route('/add_message', methods=["POST"])
@@ -41,10 +41,10 @@ def add_message():
     message = request.form.get("message")
 
     #get the user's id
-    user_id = User.query.filter(User.email == session["email"]).first()
+    user = User.query.filter(User.email == session['email']).first()
 
     #add the message to the db
-    message = Message(content=message, user_id=user_id)
+    message = Message(content=message, user_id=user.user_id)
 
     db.session.add(message)
     db.session.commit()
@@ -52,7 +52,7 @@ def add_message():
     #collect all messages from the db
     messages = Message.query.all()
 
-    return render_template('register_confirm.html', messages=messages, email=session["email"])
+    return render_template('register_confirm.html', user_email=session['email'])
 
 
 #------------------------------------------
