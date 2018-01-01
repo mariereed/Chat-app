@@ -10,15 +10,14 @@ app.jinja_env.undefined = StrictUndefined
 
 
 @app.route('/')
-def register():
+def homepage():
     """My login page."""
 
     return render_template('login.html')
 
-
-@app.route('/register_confirm', methods=["POST"])
-def register_confirm():
-    """Registration confirmation page."""
+@app.route('/register', methods=["POST"])
+def register():
+    """login the user."""
 
     email = request.form.get("email")
 
@@ -31,7 +30,17 @@ def register_confirm():
     db.session.add(new_user)
     db.session.commit()
 
-    return render_template('register_confirm.html', user_email=session['email'])
+    return redirect("/message_display")
+
+
+@app.route('/message_display', methods=["GET"])
+def message_display():
+    """Message display page."""
+
+    #collect all messages from the db
+    messages = Message.query.all()
+
+    return render_template('register_confirm.html',messages=messages, user_email=session['email'])
 
 
 @app.route('/add_message', methods=["POST"])
@@ -49,10 +58,7 @@ def add_message():
     db.session.add(message)
     db.session.commit()
 
-    #collect all messages from the db
-    messages = Message.query.all()
-
-    return render_template('register_confirm.html', messages=messages, user_email=session['email'])
+    return redirect('/message_display')
 
 
 #------------------------------------------
