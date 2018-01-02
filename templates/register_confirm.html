@@ -2,19 +2,23 @@
 <html>
   <head>
     <title>Registration Confirmation</title>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="/static/js/add_message.js"></script>
   </head>
   <body>
 
     Hello {{ user_email }}!
     <br>
-    {% if messages %}
-      {% for message in messages %}
-        <p>{{ message.content }} -- {{message.user.email}}</p>
-      {% endfor %}
-    {% endif %}
+    <div class="feed">
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{ message.content }} -- {{message.user.email}}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
     <form action="/add_message" method="POST">
-      <input type="text" name="message">
-      <input type="submit">
+      <input id="formMessage" type="text" name="message">
+      <input class="add" type="submit">
     </form>
 
   </body>

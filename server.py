@@ -15,6 +15,7 @@ def homepage():
 
     return render_template('login.html')
 
+
 @app.route('/register', methods=["POST"])
 def register():
     """login the user."""
@@ -40,7 +41,7 @@ def message_display():
     #collect all messages from the db
     messages = Message.query.all()
 
-    return render_template('register_confirm.html',messages=messages, user_email=session['email'])
+    return render_template('register_confirm.html', messages=messages, user_email=session['email'])
 
 
 @app.route('/add_message', methods=["POST"])
@@ -53,12 +54,13 @@ def add_message():
     user = User.query.filter(User.email == session['email']).first()
 
     #add the message to the db
-    message = Message(content=message, user_id=user.user_id)
+    new_message = Message(content=message, user_id=user.user_id)
 
-    db.session.add(message)
+    db.session.add(new_message)
     db.session.commit()
 
-    return redirect('/message_display')
+    #return redirect('/message_display')
+    return jsonify({'message': message, 'author': session['email']})
 
 
 #------------------------------------------
