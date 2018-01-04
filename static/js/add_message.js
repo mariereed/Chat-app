@@ -22,5 +22,7 @@ $('document').ready(function() {
     }
 
     $('.add').on('click', addMessage);
+    var objDiv = document.getElementById("feed");
+    objDiv.scrollTop = objDiv.scrollHeight;
 });
 console.log("i made it into the js fieeele");
