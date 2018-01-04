@@ -24,7 +24,7 @@
     Hello {{ user_email }}!
     <br>
     <div class="window">
-      <div class="feed">
+      <div id="feed" class="feed">
         {% if messages %}
           {% for message in messages %}
             <p>{{ message.content }} -- {{message.user.email}}</p>
