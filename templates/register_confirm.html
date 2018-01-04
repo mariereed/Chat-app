@@ -4,17 +4,33 @@
     <title>Registration Confirmation</title>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="/static/js/add_message.js"></script>
+    <style>
+
+      .window {
+        height: 400px;
+        width: 600px;
+        border: 1px black solid;
+      }
+
+      .feed {
+        height: 395px;
+        overflow: auto;
+      }
+
+    </style>
   </head>
   <body>
 
     Hello {{ user_email }}!
     <br>
-    <div class="feed">
-      {% if messages %}
-        {% for message in messages %}
-          <p>{{ message.content }} -- {{message.user.email}}</p>
-        {% endfor %}
-      {% endif %}
+    <div class="window">
+      <div class="feed">
+        {% if messages %}
+          {% for message in messages %}
+            <p>{{ message.content }} -- {{message.user.email}}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
     </div>
     <form action="/add_message" method="POST">
       <input id="formMessage" type="text" name="message">

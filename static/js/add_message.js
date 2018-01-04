@@ -6,6 +6,7 @@ $('document').ready(function() {
         console.log("i made it into the updateFeed function");
         if (! results.message.includes("<script")) {
             $('.feed').append('<p>' + results.message + ' -- ' + results.author +'</p>');
+            $(".feed").scrollTop($(".feed")[0].scrollHeight);
         }
         else {
             alert("No XSS please :)");
