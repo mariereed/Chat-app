@@ -5,7 +5,9 @@ $('document').ready(function() {
         // Add the message to the bottom of the feed
         console.log("i made it into the updateFeed function");
         if (! results.message.includes("<script")) {
-            $('.feed').append('<p>' + results.message + ' -- ' + results.author +'</p>');
+            var newPar = document.createElement("p");
+            newPar.innerText = results.message + ' -- ' + results.author;
+            $('.feed').append(newPar);
             var objDiv = document.getElementById("feed");
             objDiv.scrollTop = objDiv.scrollHeight;
         }
