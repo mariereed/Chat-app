@@ -1,6 +1,7 @@
 from jinja2 import StrictUndefined
 from flask import Flask, render_template, redirect, request, flash, session, jsonify
 from model import User, Message, Conversation, User_conv, db, connect_to_db
+from datetime import datetime
 
 app = Flask(__name__)
 # Required to use Flask sessions and the debug toolbar
@@ -54,7 +55,9 @@ def add_message():
     user = User.query.filter(User.email == session['email']).first()
 
     #add the message to the db
-    new_message = Message(content=message, user_id=user.user_id)
+    new_message = Message(content=message,
+                          user_id=user.user_id,
+                          publish_date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
     db.session.add(new_message)
     db.session.commit()

@@ -2,13 +2,31 @@
 <html>
   <head>
     <title>Our Registration Page</title>
-  </head>
-  <body>
-    Hello this is the registration page!
+    <style>
 
-    <form action="/register" method="POST">
-      email: <input type="text" name="email">
-      <input type="submit">
-    </form>
+      body {
+        margin: 20px;
+      }
+
+      .login {
+        padding: 10px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <h1>Welcome to ChatApp!</h1>
+
+    <div class="login">
+      <h3>This is the login page</h3>
+
+      <form action="/register" method="POST">
+        email: <input type="text" name="email">
+        <input type="submit">
+      </form>
+    </div>
+    
   </body>
 </html>
