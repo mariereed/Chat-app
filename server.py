@@ -2,12 +2,17 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, redirect, request, flash, session, jsonify
 from model import User, Message, Conversation, User_conv, db, connect_to_db
 from datetime import datetime
+from flask_socketio import SocketIO, send
 
 app = Flask(__name__)
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = "ABC"
 # Raise error for undefined variable
 app.jinja_env.undefined = StrictUndefined
+
+#-------
+#setting up web sockets
+socketio = SocketIO(app)
 
 
 @app.route('/')
@@ -74,4 +79,5 @@ if __name__ == "__main__":
 
     connect_to_db(app, 'postgresql:///chatappdb')
 
-    app.run(port=5000, host='0.0.0.0')
+    # app.run(port=5000, host='0.0.0.0')
+    socketio.run(app)
